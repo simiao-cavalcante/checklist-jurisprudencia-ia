@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checklist: pesquisa de jurisprudência com IA</title>
+<meta name="description" content="As cinco conferências antes de citar um julgado que veio da IA, as ferramentas e os links oficiais. Material da palestra de Simião Cavalcante no IALIC 2026.">
+<meta property="og:title" content="Checklist: pesquisa de jurisprudência com IA">
+<meta property="og:description" content="As cinco conferências antes de citar um julgado que veio da IA. Material da palestra no IALIC 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&family=Patrick+Hand&family=Sora:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --lousa:#1E3329; --lousa2:#243d31; --giz:#F1EEE4; --azul:#9CC6FF; --laranja:#F2B880; --apagado:#B9C2B6; }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin:0; background:var(--lousa); color:var(--giz); font-family:'Sora', Arial, sans-serif; font-size:17px; line-height:1.6;
+    background-image: radial-gradient(ellipse at 20% 0%, rgba(241,238,228,.07), transparent 60%), radial-gradient(ellipse at 90% 100%, rgba(241,238,228,.05), transparent 55%); background-attachment: fixed; }
+  main { max-width: 760px; margin: 0 auto; padding: 40px 20px 64px; }
+  .olho { color:var(--apagado); font-size:14px; letter-spacing:.04em; text-transform:uppercase; margin:0 0 12px; }
+  h1 { font-family:'Cabin Sketch', cursive; font-size: clamp(38px, 9vw, 60px); line-height:1.05; margin:0 0 12px; }
+  .sub { font-family:'Patrick Hand', cursive; font-size: clamp(22px, 5vw, 28px); color:var(--azul); margin:0 0 8px; line-height:1.25; }
+  .autor { color:var(--apagado); font-size:15px; margin:0 0 8px; }
+  h2 { font-family:'Cabin Sketch', cursive; font-size: clamp(28px, 6.5vw, 36px); line-height:1.1; margin:56px 0 6px; color:var(--giz); }
+  h2 + .nota { margin-top:0; }
+  .nota { color:var(--apagado); font-size:15px; }
+  a { color:var(--azul); text-underline-offset:3px; }
+  a:hover { color:var(--giz); }
+
+  .lista { list-style:none; padding:0; margin:20px 0 0; }
+  .item { display:flex; gap:16px; align-items:flex-start; padding:16px 0; border-bottom:2px dashed rgba(185,194,182,.35); cursor:pointer; }
+  .item input { position:absolute; opacity:0; width:0; height:0; }
+  .caixa { flex:none; width:38px; height:38px; margin-top:4px; border:3px solid var(--giz); border-radius:6px; display:grid; place-items:center; }
+  .caixa svg { width:30px; height:30px; stroke:var(--azul); stroke-width:5; fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:60; stroke-dashoffset:60; transition:stroke-dashoffset .35s ease; }
+  .item input:checked + .caixa svg { stroke-dashoffset:0; }
+  .item input:focus-visible + .caixa { outline:3px solid var(--azul); outline-offset:3px; }
+  .perg { font-family:'Cabin Sketch', cursive; font-size: clamp(24px, 6vw, 30px); line-height:1.15; display:block; }
+  .perg b { color:var(--azul); font-weight:700; margin-right:6px; }
+  .como { display:block; color:var(--apagado); font-size:15.5px; margin-top:4px; }
+  .pega { display:inline-block; font-family:'Patrick Hand', cursive; font-size:18px; color:var(--laranja); margin-top:4px; }
+  .acoes { margin-top:16px; }
+  button { font:inherit; font-size:14px; color:var(--apagado); background:none; border:2px dashed var(--apagado); border-radius:8px; padding:8px 14px; cursor:pointer; }
+  button:hover { color:var(--giz); border-color:var(--giz); }
+
+  .cartoes { display:grid; gap:14px; margin-top:20px; }
+  .cartao { border:3px solid rgba(241,238,228,.75); border-radius:10px; padding:16px 18px; background:rgba(0,0,0,.08); }
+  .cartao h3 { font-family:'Cabin Sketch', cursive; font-size:26px; margin:0 0 4px; line-height:1.1; }
+  .cartao h3 b { color:var(--laranja); margin-right:6px; }
+  .cartao p { margin:0; color:var(--apagado); font-size:15.5px; }
+
+  .tabela { margin-top:20px; display:grid; gap:0; }
+  .linha { display:grid; grid-template-columns: 1fr; gap:2px; padding:14px 0; border-bottom:2px dashed rgba(185,194,182,.35); }
+  .linha .tarefa { font-family:'Patrick Hand', cursive; font-size:22px; line-height:1.2; }
+  .linha .ferr { font-family:'Cabin Sketch', cursive; font-size:24px; color:var(--azul); line-height:1.15; }
+  .linha .obs { color:var(--apagado); font-size:15px; }
+  @media (min-width:620px) { .linha { grid-template-columns: 1fr 1.25fr; column-gap:24px; } .linha .obs { grid-column: 1 / -1; } }
+
+  ul.links { padding-left:20px; margin:16px 0 0; }
+  ul.links li { margin:0 0 12px; }
+  ul.links span { color:var(--apagado); font-size:15px; display:block; }
+  .frase { font-family:'Cabin Sketch', cursive; font-size: clamp(30px, 7.5vw, 44px); line-height:1.1; margin:64px 0 0; }
+  .frase em { font-style:normal; color:var(--laranja); display:block; margin-top:6px; }
+  footer { margin-top:56px; padding-top:20px; border-top:2px dashed rgba(185,194,182,.35); color:var(--apagado); font-size:14.5px; }
+  footer p { margin:0 0 8px; }
+  @media print { body { background:#fff; color:#111; } :root { --giz:#111; --apagado:#444; --azul:#0b3d91; --laranja:#8a4b00; } button { display:none; } .cartao { background:none; border-color:#111; } }
+</style>
+</head>
+<body>
+<main>
+  <p class="olho">IALIC 2026 · Congresso de IA Aplicada às Licitações e Contratos</p>
+  <h1>Pesquisa de jurisprudência com IA</h1>
+  <p class="sub">o checklist para ganhar velocidade sem perder confiabilidade</p>
+  <p class="autor">Material da palestra de <a href="https://instagram.com/simiao_cavalcante">Simião Cavalcante</a></p>
+
+  <h2>As cinco conferências</h2>
+  <p class="nota">Antes de citar um julgado que veio da IA, passe por estas cinco perguntas. Toque para marcar.</p>
+  <ul class="lista" id="lista">
+    <li><label class="item"><input type="checkbox" data-k="c1"><span class="caixa"><svg viewBox="0 0 40 40"><path d="M7 21 L16 30 L33 9"/></svg></span><span><span class="perg"><b>1</b>Existe?</span><span class="como">Abra o julgado no site do próprio tribunal, pelo número. Se a pesquisa oficial não devolve nada, não cite.</span><span class="pega">pega o erro 1: julgado inventado</span></span></label></li>
+    <li><label class="item"><input type="checkbox" data-k="c2"><span class="caixa"><svg viewBox="0 0 40 40"><path d="M7 21 L16 30 L33 9"/></svg></span><span><span class="perg"><b>2</b>É esse mesmo?</span><span class="como">Confira órgão, colegiado, relator e data. Um número certo com relator ou data errados é sinal de mistura de julgados.</span></span></label></li>
+    <li><label class="item"><input type="checkbox" data-k="c3"><span class="caixa"><svg viewBox="0 0 40 40"><path d="M7 21 L16 30 L33 9"/></svg></span><span><span class="perg"><b>3</b>Diz isso, no inteiro teor?</span><span class="como">Localize o trecho no voto ou no acórdão. Ementa e resumo servem para a triagem; a citação sai do inteiro teor.</span><span class="pega">pega o erro 2: conteúdo trocado</span></span></label></li>
+    <li><label class="item"><input type="checkbox" data-k="c4"><span class="caixa"><svg viewBox="0 0 40 40"><path d="M7 21 L16 30 L33 9"/></svg></span><span><span class="perg"><b>4</b>Ainda vale, na lei atual?</span><span class="como">Veja a lei em que o julgado se apoia e se houve superação. Precedente da Lei 8.666 não se transporta sozinho para a Lei 14.133.</span><span class="pega">pega o erro 3: lei anterior ou entendimento superado</span></span></label></li>
+    <li><label class="item"><input type="checkbox" data-k="c5"><span class="caixa"><svg viewBox="0 0 40 40"><path d="M7 21 L16 30 L33 9"/></svg></span><span><span class="perg"><b>5</b>Serve ao meu caso?</span><span class="como">Compare o fato julgado com o seu. Tese parecida sobre fato diferente não sustenta a peça.</span></span></label></li>
+  </ul>
+  <p class="acoes"><button type="button" id="limpar">Limpar as marcações</button></p>
+  <p class="nota">Rotina que recomendo: junte ao processo o link e o print de cada julgado citado, com a data da consulta.</p>
+
+  <h2>Os três erros da IA</h2>
+  <div class="cartoes">
+    <div class="cartao"><h3><b>1</b>Julgado inventado</h3><p>Número, relator e ementa com aparência perfeita, e o julgado não existe em nenhum repositório oficial.</p></div>
+    <div class="cartao"><h3><b>2</b>Conteúdo trocado</h3><p>O julgado existe, mas trata de outro assunto ou diz o contrário do que a IA atribuiu a ele.</p></div>
+    <div class="cartao"><h3><b>3</b>Lei anterior ou superação</h3><p>O julgado existe e diz aquilo, mas foi proferido sob a lei antiga ou já foi superado.</p></div>
+  </div>
+
+  <h2>Qual ferramenta para qual tarefa</h2>
+  <div class="tabela">
+    <div class="linha"><span class="tarefa">Achar o julgado</span><span class="ferr">Conector jurídico</span><span class="obs">A IA consulta um acervo de decisões antes de responder e devolve o link de cada uma. Exemplos: <a href="https://iajus.com.br/conceitos/como-a-ia-encontra">IAJUS</a> e <a href="https://jusratio.com.br/conector">Jusratio</a>. Se a busca não achou, isso não prova que o julgado não existe.</span></div>
+    <div class="linha"><span class="tarefa">Montar o panorama</span><span class="ferr">Deep Research e caderno</span><span class="obs">O <a href="https://gemini.google/overview/deep-research/">Gemini Deep Research</a> abre o mapa do tema; você separa as fontes oficiais; o Gemini Notebook (antigo NotebookLM) responde sobre elas, com <a href="https://support.google.com/notebooklm/answer/16179559">citação por trecho</a>.</span></div>
+    <div class="linha"><span class="tarefa">Conferir na fonte</span><span class="ferr">Navegador com IA</span><span class="obs">A IA abre o site do tribunal e localiza o trecho com você olhando. Leia antes as <a href="https://support.claude.com/en/articles/12902428-using-claude-in-chrome-safely">orientações de segurança</a>: página da internet pode trazer comando oculto.</span></div>
+    <div class="linha"><span class="tarefa">Conferir em lote, com registro</span><span class="ferr">Browser harness</span><span class="obs">Nível avançado: o agente de código controla o seu Chrome e confere uma lista inteira, salvando link e print. <a href="https://github.com/browser-use/browser-harness">Projeto de código aberto</a>. Regra: leitura sim, protocolo não.</span></div>
+  </div>
+
+  <h2>Onde conferir</h2>
+  <ul class="links">
+    <li><a href="https://pesquisa.apps.tcu.gov.br/">TCU, Pesquisa Integrada</a><span>Acórdãos, súmulas e jurisprudência selecionada. O resumo por IA que a página mostra serve para a triagem.</span></li>
+    <li><a href="https://scon.stj.jus.br/SCON/">STJ, pesquisa de jurisprudência</a><span>O próprio tribunal recomendou a conferência nessa página para evitar citações falsas geradas por IA.</span></li>
+    <li><a href="https://jurisprudencia.stf.jus.br/">STF, pesquisa de jurisprudência</a></li>
+    <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14133.htm">Lei 14.133/2021, texto compilado</a><span>Para a quarta conferência: a redação em vigor.</span></li>
+  </ul>
+  <p class="nota">Tribunal de contas estadual ou municipal: use a pesquisa do site do próprio tribunal.</p>
+
+  <h2>O caso prático da palestra</h2>
+  <p class="nota">Proposta abaixo de 75% do valor orçado em obra ou serviço de engenharia (Lei 14.133, art. 59, § 4º): a presunção de inexequibilidade é relativa, e a Administração deve dar ao licitante a oportunidade de demonstrar a exequibilidade. Acórdãos do Plenário do TCU, abertos na Pesquisa Integrada em 17/11/2026:</p>
+  <ul class="links">
+    <li>Acórdão 465/2024, rel. Min. Augusto Sherman, sessão de 20/03/2024</li>
+    <li>Acórdão 803/2024, rel. Min. Benjamin Zymler, sessão de 24/04/2024</li>
+    <li>Acórdão 2378/2024, rel. Min. Benjamin Zymler, sessão de 06/11/2024</li>
+    <li>Acórdão 214/2025, rel. Min. Jhonatan de Jesus, sessão de 05/02/2025<span>Desclassificações sumárias anuladas e retorno à fase de análise das propostas.</span></li>
+  </ul>
+  <p class="nota">A Súmula TCU 262 diz o mesmo, mas trata do art. 48 da Lei 8.666/1993: é o terceiro erro aparecendo num resultado correto. E não acredite nesta lista: confira cada um na fonte.</p>
+
+  <h2>Quem assina responde</h2>
+  <ul class="links">
+    <li>OAB, Recomendação 001/2024 do Conselho Federal, item 3.7<span>Revisão de tudo o que a IA produz, sem confiança exclusiva na ferramenta.</span></li>
+    <li><a href="https://atos.cnj.jus.br/atos/detalhar/6001">CNJ, Resolução 615/2025</a>, art. 19, § 3º, II</li>
+    <li>TCU, Guia de uso de IA generativa (2024)</li>
+    <li><a href="https://www.stj.jus.br/sites/portalp/paginas/comunicacao/noticias/2026/03112026-consulta-a-pagina-de-jurisprudencia-do-stj-ajuda-a-evitar-citacoes-falsas-geradas-por-ia.aspx">STJ, nota de 03/11/2026 sobre citações falsas geradas por IA</a></li>
+    <li><a href="https://dho.stanford.edu/wp-content/uploads/Legal_RAG_Hallucinations.pdf">Stanford, estudo sobre alucinação em ferramentas jurídicas de IA</a><span>Journal of Empirical Legal Studies, 2025.</span></li>
+  </ul>
+
+  <p class="frase">A IA encontra. Quem assina é você.<em>Confira antes.</em></p>
+
+  <footer>
+    <p>Simião Cavalcante · <a href="https://instagram.com/simiao_cavalcante">Instagram @simiao_cavalcante</a> · <a href="https://youtube.com/@simiao.cavalcante">YouTube @simiao.cavalcante</a></p>
+    <p>Material educativo e independente, sem vínculo com as ferramentas citadas. Links e julgados conferidos em 17/11/2026.</p>
+  </footer>
+</main>
+<script>
+(function () {
+  var K = 'checklist-juris-ia';
+  var boxes = document.querySelectorAll('#lista input');
+  var estado = {};
+  try { estado = JSON.parse(localStorage.getItem(K) || '{}') || {}; } catch (e) {}
+  function salvar() { try { localStorage.setItem(K, JSON.stringify(estado)); } catch (e) {} }
+  boxes.forEach(function (b) {
+    b.checked = !!estado[b.dataset.k];
+    b.addEventListener('change', function () { estado[b.dataset.k] = b.checked; salvar(); });
+  });
+  document.getElementById('limpar').addEventListener('click', function () {
+    estado = {}; boxes.forEach(function (b) { b.checked = false; }); salvar();
+  });
+})();
+</script>
+</body>
+</html>
